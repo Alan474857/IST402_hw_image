@@ -84,26 +84,6 @@ async function checkAllChoice(){
     sub_hint.className = "invisible"
 }
 
-
-
-//format functions
-
-//<type custom>...</type>
-function double_format(type, custom, content) {
-    if (custom.length > 0) {
-        custom = " " + custom;
-    }
-    return `<${type}${custom}>${content}</${type}>`;
-}
-
-//<type custom>...
-function single_format(type, custom, content) {
-    return `<${type} ${custom}>${content}`;
-}
-
-$(document).ready(function () {
-    loadFile();
-});
 async function submitForm(event) {
     event.preventDefault();
     if (!validateForm()) {
@@ -143,3 +123,22 @@ async function submitForm(event) {
     console.log("id false")
     return false;
 }
+
+//format functions
+
+//<type custom>...</type>
+function double_format(type, custom, content) {
+    if (custom.length > 0) {
+        custom = " " + custom;
+    }
+    return `<${type}${custom}>${content}</${type}>`;
+}
+
+//<type custom>...
+function single_format(type, custom, content) {
+    return `<${type} ${custom}>${content}`;
+}
+
+$(document).ready(function () {
+    loadFile();
+});
