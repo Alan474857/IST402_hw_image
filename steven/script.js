@@ -104,3 +104,42 @@ function single_format(type, custom, content) {
 $(document).ready(function () {
     loadFile();
 });
+async function submitForm(event) {
+    event.preventDefault();
+    if (!validateForm()) {
+        console.log("input false")
+        alert("Please complete all annotations before submission.");
+        return false;
+    }
+    console.log("input true")
+    console.log("start submitting")
+    if (gup("assignmentId") != "") {
+
+        var jobkey = gup("assignmentId");
+        if (gup("hitId") != "") {
+            jobkey += "|" + gup("hitId");
+        }
+        if (gup("assignmentId") == "ASSIGNMENT_ID_NOT_AVAILABLE") {
+            $('input').attr("DISABLED", "true");
+            _allowSubmit = false;
+        } else {
+            console.log('allow submission')
+            _allowSubmit = true;
+        }
+        $('#mturk-assignmentId').attr('value', gup("assignmentId"));
+        $("#mturk_form").attr('method', 'POST');
+
+        if (gup("turkSubmitTo") != "") {
+            $("#mturk_form").attr('action', gup("turkSubmitTo") + '/mturk/externalSubmit');
+        }
+        // console.log(gup("turkSubmitTo") + '/mturk/externalSubmit')
+        // console.log($("#mturk_form"));
+        console.log("id true")
+        console.log("form submitting")
+        $("#mturk_form").submit();
+        return false;
+    }
+    /*For some reasons you need this*/
+    console.log("id false")
+    return false;
+}
